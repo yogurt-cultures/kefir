@@ -219,14 +219,19 @@ def swap_front_and_back(text):
 
 def voice(text):
   '''
-  voicing or sonorization (yumuşama in turkish)
-  ---------------------------------------------
+  ## Voicing or sonorization (yumuşama in turkish)
   to make pronouncation easier, nouns ending
-  with these sounds:
+  with these sounds.
+
+  ```
   ⟨p⟩ ⟨ç⟩ ⟨t⟩ ⟨k⟩ 
+  ```
 
   may be softened by replacing them in order:
+
+  ```
   ⟨b⟩ ⟨c⟩ ⟨d⟩ ⟨ğ⟩
+  ```
 
   ✎︎ examples
   ```
@@ -251,8 +256,7 @@ def voice(text):
 
 def devoice(text):
   '''
-  devoicing or desonorization (sertleşme in turkish)
-  --------------------------------------------------
+  ## Devoicing or desonorization (sertleşme in turkish)
   to make pronouncation easier, nouns ending with
   these sounds:
   ```

@@ -67,7 +67,7 @@ def get_case_processor(case):
 
 def nominative(text):
   '''
-  # nominative case (yalın in turkish)
+  ## nominative case (yalın in turkish)
   the simplest grammatical case, there's no suffix to
   affix in that case.
 
@@ -78,7 +78,7 @@ def nominative(text):
 
 def ablative(text):
   '''
-  # ablative case (ayrılma in turkish)
+  ## ablative case (ayrılma in turkish)
   a grammatical case for nouns, pronouns and adjectives in
   the grammar of various languages; it is sometimes used to
   express motion away from something, among other uses.
@@ -102,7 +102,7 @@ def ablative(text):
 
 def accusative(text, voicer=voice):
   '''
-  # accusative (ilgi in turkish)
+  ## accusative (ilgi in turkish)
   The accusative case (abbreviated acc) of a noun is the
   grammatical case used to mark the direct object of a
   transitive verb. The same case is used in many
@@ -137,7 +137,7 @@ def accusative(text, voicer=voice):
 
 def genitive(text):
   '''
-  # genitive case (genitifler in turkish)
+  ## genitive case (genitifler in turkish)
   In grammar, the genitive is the grammatical case
   that marks a word, usually a noun, as modifying
   another word, also usually a noun.
@@ -180,7 +180,7 @@ def genitive(text):
 
 def dative(text):
   '''
-  # going-towards case (yönelme in turkish)
+  ## dative case (yönelme in turkish)
   In some languages, the dative is used to mark the
   indirect object of a sentence.
 
@@ -212,7 +212,7 @@ def dative(text):
 
 def locative(text):
   '''
-  # locative case (bulunma in turkish)
+  ## locative case (bulunma in turkish)
   Locative is a grammatical case which indicates a location.
   It corresponds vaguely to the English prepositions "in",
   "on", "at", and "by". 

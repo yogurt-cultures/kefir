@@ -18,6 +18,7 @@ def include_line(part):
   return part.strip().startswith('#')
 
 for module in modules_to_document:
+  module_name = module.__name__
   content = open(module.__file__).read()
   docs = [
     part
@@ -25,6 +26,11 @@ for module in modules_to_document:
     if include_line(part)
   ]
 
+  if module_name == 'kefir':
+    print('<details open>')
+  else:
+    print('<details>')
+  print('<summary>%s</summary>' % module_name)
   for doc in docs:
     tab = '  '
     for line in doc.splitlines():
@@ -32,3 +38,5 @@ for module in modules_to_document:
         print(line.lstrip(tab))
       else:
         print(line)
+  print('</details>')
+
