@@ -1,4 +1,6 @@
-"""
+'''
+# Kefir
+
 ![Logo](https://avatars1.githubusercontent.com/u/42190640?s=200&v=4)
 
 Yogurt is a free software community that establised in `Mustafa Akgul Ozgul Yazılım Kampı` in 2018.
@@ -30,7 +32,7 @@ https://www.wikiwand.com/en/Predicate_(grammar)
 'ali öl'
 
 ```
-"""
+'''
 from .subject import subject
 from .predication import predicate
 

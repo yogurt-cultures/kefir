@@ -1,5 +1,6 @@
-"""
-### Turkish Grammar / Grammatical Cases
+'''
+# Turkish Grammar / Grammatical Cases
+==========================================================
 
 Implemented only six grammatical cases.
 
@@ -26,7 +27,7 @@ Turkish has 9 more cases.
   https://en.wikibooks.org/wiki/Turkish/Cases
 
 TODO: Enum'lardaki rakamlar yerine auto() kullanılmalı.
-"""
+'''
 from enum import Enum
 
 from .functional import join, is_truthy, skip_falsy_and_join
@@ -66,7 +67,7 @@ def get_case_processor(case):
   }.get(case)
 
 def nominative(text):
-  """
+  '''
   nominative case (yalın in turkish)
   ----------------------------------
   the simplest grammatical case, there's no suffix to
@@ -74,11 +75,11 @@ def nominative(text):
 
   nominative comes from latin cāsus nominātīvus 
   means case for naming.
-  """
+  '''
   return text
 
 def ablative(text):
-  """
+  '''
   ablative case (ayrılma in turkish)
   -den, -dan, -ten or -tan
   --------------------------------------------------------
@@ -93,7 +94,7 @@ def ablative(text):
   teyit[ten] geçtim
   açlık[tan] öldüm
   ```
-  """
+  '''
   [*head, endswith] = text
 
   if endswith in VOICELESS_CONSONANTS:
@@ -104,7 +105,7 @@ def ablative(text):
   return join(*head, endswith, suffix)
 
 def accusative(text, voicer=voice):
-  """
+  '''
   accusative (ilgi in turkish)
   -ı, -i, -u, or -ü
   --------------------------------------------------------
@@ -119,7 +120,7 @@ def accusative(text, voicer=voice):
   evim[i] yaptım
   üzüm[ü] pişirdim
   ```
-  """
+  '''
   last_vowel = get_last_vowel(text)
   sound = get_vowel_symbol(last_vowel)
 
@@ -141,7 +142,7 @@ def accusative(text, voicer=voice):
   )
 
 def genitive(text):
-  """
+  '''
   genitive case (genitifler in turkish)
   -nın, -nin, -nun, or -nün
   -----------------------------------------------------
@@ -156,7 +157,7 @@ def genitive(text):
   باب بيت bābu baytin (the door of a house)
   mari[i] nie ma w domu (maria is not at home)
   ```
-  """
+  '''
   last_vowel = get_last_vowel(text)
   sound = get_vowel_symbol(last_vowel)
 
@@ -186,7 +187,7 @@ def genitive(text):
   )
 
 def dative(text):
-  """
+  '''
   going-towards case (yönelme in turkish)
   -e, -a
   -----------------------------------------------------
@@ -198,7 +199,7 @@ def dative(text):
   marya yakup'a bir drink verdi (maria gave jacob a drink)
   maria jacobī potum dedit (maria gave jacob a drink)
   ```
-  """
+  '''
   last_vowel = get_last_vowel(text)
   sound = get_vowel_symbol(last_vowel)
 
@@ -220,7 +221,7 @@ def dative(text):
   )
 
 def locative(text):
-  """
+  '''
   locative case (bulunma in turkish)
   -de, -da
   -----------------------------------------------------
@@ -234,7 +235,7 @@ def locative(text):
   yorum[da] iyi beatler var.
   kalem[de] güzel uç var.
   ```
-  """
+  '''
   last_vowel = get_last_vowel(text)
   sound = get_vowel_symbol(last_vowel)
 

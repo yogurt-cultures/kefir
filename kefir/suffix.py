@@ -1,6 +1,6 @@
-"""
+'''
 TODO: Suffix should subclass Enum
-"""
+'''
 class Suffix:
   NEGATIVE = 'değil'
   IMPERFECT = 'yor'

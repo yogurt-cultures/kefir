@@ -7,25 +7,25 @@ from kefir import case
 
 modules_to_document = [
   kefir,
-  phonology,
   case,
+  phonology,
   predication,
 ]
 
+DOCSTRING_TOKEN = "'''"
+
+def include_line(part):
+  return part.strip().startswith('#')
+
 for module in modules_to_document:
-  print(module.__doc__)
+  content = open(module.__file__).read()
+  docs = [
+    part
+    for part in content.split(DOCSTRING_TOKEN)
+    if include_line(part)
+  ]
 
-  functions = [
-    o for o in getmembers(module)
-            if isfunction(o[1])
-    ]
-
-  for (name, function) in functions:
-    doc = function.__doc__
-
-    if not doc:
-      continue
-
+  for doc in docs:
     tab = '  '
     for line in doc.splitlines():
       if line.startswith(tab):

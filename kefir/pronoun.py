@@ -1,4 +1,4 @@
-"""
+'''
 Turkish Grammar / Pronouns
 
               singular                plural
@@ -11,5 +11,5 @@ Turkish Grammar / Pronouns
   genitive    benim   senin   onun    bizim   sizin   onların
 
 TODO: Implement pronouns.
-"""
+'''
 
