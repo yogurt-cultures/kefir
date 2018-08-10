@@ -61,6 +61,81 @@ https://en.wikibooks.org/wiki/Turkish/Cases
 
 TODO: Enum'lardaki rakamlar yerine auto() kullanılmalı.
 
+# nominative case (yalın in turkish)
+the simplest grammatical case, there's no suffix to
+affix in that case.
+
+nominative comes from latin cāsus nominātīvus 
+means case for naming.
+
+
+# ablative case (ayrılma in turkish)
+a grammatical case for nouns, pronouns and adjectives in
+the grammar of various languages; it is sometimes used to
+express motion away from something, among other uses.
+
+✎︎ examples
+```
+adalar[dan] geldim
+merkez[den] geçtim
+teyit[ten] geçtim
+açlık[tan] öldüm
+```
+
+
+# accusative (ilgi in turkish)
+--------------------------------------------------------
+The accusative case (abbreviated acc) of a noun is the
+grammatical case used to mark the direct object of a
+transitive verb. The same case is used in many
+languages for the objects of (some or all) prepositions. 
+
+✎︎ examples
+```
+aday[ı] yedim
+evim[i] yaptım
+üzüm[ü] pişirdim
+```
+
+
+# genitive case (genitifler in turkish)
+In grammar, the genitive is the grammatical case
+that marks a word, usually a noun, as modifying
+another word, also usually a noun.
+
+✎︎ examples
+```
+hanımelinin çiçeği (flower of a plant called hanımeli)
+kadının ayakkabısı (shoes of the woman)
+باب بيت bābu baytin (the door of a house)
+mari[i] nie ma w domu (maria is not at home)
+```
+
+
+# going-towards case (yönelme in turkish)
+In some languages, the dative is used to mark the
+indirect object of a sentence.
+
+✎︎ examples
+```
+marya yakup'a bir drink verdi (maria gave jacob a drink)
+maria jacobī potum dedit (maria gave jacob a drink)
+```
+
+
+# locative case (bulunma in turkish)
+Locative is a grammatical case which indicates a location.
+It corresponds vaguely to the English prepositions "in",
+"on", "at", and "by". 
+
+✎︎ examples
+```
+bahçe[de] hanımeli var.
+yorum[da] iyi beatler var.
+kalem[de] güzel uç var.
+```
+
+
 # Turkish phonology
 
 In Hungarian, Finnish, and Turkic languages
