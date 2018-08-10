@@ -86,43 +86,6 @@ prośba → prɔʑba
 ```
 
 
-#### is_back
-Determines whether the text is back sounded or not
-```python
->>> is_back('kalamar')
-True
->>> is_back('öküz')
-False
-
-```
-
-
-### is_front
-Determines whether the text is front sounded or not
-```python
->>> is_front('kalamar')
-False
->>> is_front('öküz')
-True
-
-```
-
-
-#### is_rounded
-Determines whether the text is sounded as rounded or not
-```python
->>> is_rounded('omuz')
-True
-
->>> is_rounded('öküz')
-True
-
->>> is_rounded('erik')
-False
-
-```
-
-
 #### swap_front_and_back
 Swaps front sounds to back, and vice versa
 
@@ -254,28 +217,6 @@ hanımelinin çiçeği (flower of a plant called hanımeli)
 kadının ayakkabısı (shoes of the woman)
 باب بيت bābu baytin (the door of a house)
 mari[i] nie ma w domu (maria is not at home)
-```
-
-
-#### is_back
-Determines whether the text is back sounded or not
-```python
->>> is_back('kalamar')
-True
->>> is_back('öküz')
-False
-
-```
-
-
-### is_front
-Determines whether the text is front sounded or not
-```python
->>> is_front('kalamar')
-False
->>> is_front('öküz')
-True
-
 ```
 
 
@@ -573,43 +514,6 @@ doktormuş (he/she/it was a doctor as i've heard)
 
 >>> inferential('o', 'ada', ' ', Person.THIRD, is_plural=False)
 'o adaymış'
-
-```
-
-
-#### is_back
-Determines whether the text is back sounded or not
-```python
->>> is_back('kalamar')
-True
->>> is_back('öküz')
-False
-
-```
-
-
-### is_front
-Determines whether the text is front sounded or not
-```python
->>> is_front('kalamar')
-False
->>> is_front('öküz')
-True
-
-```
-
-
-#### is_rounded
-Determines whether the text is sounded as rounded or not
-```python
->>> is_rounded('omuz')
-True
-
->>> is_rounded('öküz')
-True
-
->>> is_rounded('erik')
-False
 
 ```
 

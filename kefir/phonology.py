@@ -153,49 +153,12 @@ def determine_vowel_harmony(text):
   raise MissingVowelSound
 
 def is_front(text):
-  '''
-  ### is_front
-  Determines whether the text is front sounded or not
-  ```python
-  >>> is_front('kalamar')
-  False
-  >>> is_front('öküz')
-  True
-
-  ```
-  '''
   return determine_vowel_harmony(text) is Front
 
 def is_back(text):
-  '''
-  #### is_back
-  Determines whether the text is back sounded or not
-  ```python
-  >>> is_back('kalamar')
-  True
-  >>> is_back('öküz')
-  False
-
-  ```
-  '''
   return determine_vowel_harmony(text) is Back
 
 def is_rounded(text):
-  '''
-  #### is_rounded
-  Determines whether the text is sounded as rounded or not
-  ```python
-  >>> is_rounded('omuz')
-  True
-
-  >>> is_rounded('öküz')
-  True
-
-  >>> is_rounded('erik')
-  False
-
-  ```
-  '''
   return get_vowel_symbol(get_last_vowel(text)) in ROUNDED_VOWELS
 
 def harmony(sound):
@@ -266,19 +229,19 @@ def voice(text):
   ⟨b⟩ ⟨c⟩ ⟨d⟩ ⟨ğ⟩
 
   ✎︎ examples
-    ```
-    ço⟨p⟩un → ço⟨b⟩un
-    ağa⟨ç⟩ın → ağa⟨c⟩n
-    kağı⟨t⟩ın → kağı⟨d⟩ın 
-    ren⟨k⟩in → ren⟨g⟩in
-    ```
+  ```
+  ço⟨p⟩un → ço⟨b⟩un
+  ağa⟨ç⟩ın → ağa⟨c⟩n
+  kağı⟨t⟩ın → kağı⟨d⟩ın 
+  ren⟨k⟩in → ren⟨g⟩in
+  ```
 
   ✎︎ examples in other languages
-    ```
-    li⟨f⟩e → li⟨v⟩e
-    stri⟨f⟩e → stri⟨v⟩e
-    proo⟨f⟩ → pro⟨v⟩e
-    ```
+  ```
+  li⟨f⟩e → li⟨v⟩e
+  stri⟨f⟩e → stri⟨v⟩e
+  proo⟨f⟩ → pro⟨v⟩e
+  ```
   '''
   for sound, softened in SOFTENING_SOUNDS.items():
     if text.endswith(sound):
