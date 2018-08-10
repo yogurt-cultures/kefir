@@ -1,6 +1,6 @@
 '''
-# Turkish Grammar / Turkish Predication and Copula
-==================================================================
+# Turkish Predication and Copula
+
 turkish language copulas, which are called as ek-eylem which
 literally means 'suffix-verb' are one of the most distinct
 features of turkish grammar.

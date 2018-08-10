@@ -1,6 +1,5 @@
 '''
-# Turkish Grammar / Grammatical Cases
-==========================================================
+# Grammatical Cases
 
 Implemented only six grammatical cases.
 

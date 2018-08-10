@@ -33,8 +33,7 @@ https://www.wikiwand.com/en/Predicate_(grammar)
 
 ```
 
-# Turkish Grammar / Grammatical Cases
-==========================================================
+# Grammatical Cases
 
 Implemented only six grammatical cases.
 
@@ -62,8 +61,8 @@ https://en.wikibooks.org/wiki/Turkish/Cases
 
 TODO: Enum'lardaki rakamlar yerine auto() kullanılmalı.
 
-# Turkish Grammar / Turkish phonology
-===============================================
+# Turkish phonology
+
 In Hungarian, Finnish, and Turkic languages
 vowel sounds are organized in a concept called
 vowel harmony. Vowels may be classified as Back
@@ -103,8 +102,8 @@ Swaps front sounds to back, and vice versa
 ```
 
 
-# Turkish Grammar / Turkish Predication and Copula
-==================================================================
+# Turkish Predication and Copula
+
 turkish language copulas, which are called as ek-eylem which
 literally means 'suffix-verb' are one of the most distinct
 features of turkish grammar.
