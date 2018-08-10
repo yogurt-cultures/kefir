@@ -84,7 +84,6 @@ açlık[tan] öldüm
 
 
 # accusative (ilgi in turkish)
---------------------------------------------------------
 The accusative case (abbreviated acc) of a noun is the
 grammatical case used to mark the direct object of a
 transitive verb. The same case is used in many
