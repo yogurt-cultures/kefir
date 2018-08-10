@@ -10,6 +10,11 @@ def to_dict(named_tuple):
 def enum_values(enum):
   return (member.value for member in enum)
 
+def get_enum_member(enum, value):
+  for member in enum:
+    if member.value == value:
+      return member
+
 def join(*items):
   return NOTHING.join(items)
 

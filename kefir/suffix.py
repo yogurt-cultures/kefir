@@ -33,3 +33,5 @@ class Suffix:
   S = 's'
   Z = 'z'
   K = 'k'
+
+  DELIMITER = ' '

@@ -9,7 +9,12 @@ TODO: Remove unused imports.
 '''
 from enum import Enum, auto
 
-from .functional import join, is_truthy, skip_falsy_and_join, NOTHING, identity
+from .functional import (join,
+                         is_truthy,
+                         skip_falsy_and_join,
+                         NOTHING,
+                         identity,
+                         get_enum_member)
 from .suffix import Suffix
 from .case import accusative
 from .phonology import (get_last_vowel,
@@ -31,21 +36,22 @@ from .phonology import (get_last_vowel,
                         swap_front_and_back)
 
 class Person(Enum):
-  FIRST = auto()
-  SECOND = auto()
-  THIRD = auto()
+  FIRST = 'first'
+  SECOND = 'second'
+  THIRD = 'third'
 
 class Copula(Enum):
-  NEGATIVE = -1
-  ZERO = 0
-  TOBE = 1
-  PERSONAL = 2
-  PERFECT = 3
-  IMPERFECT = 4
-  PROGRESSIVE = 5
-  NECESSITATIVE = 6
-  FUTURE = 7
-  IMPOTENTIAL = 8
+  NEGATIVE = 'negative'
+  ZERO = 'zero'
+  TOBE = 'tobe'
+  PERSONAL = 'personal'
+  PERFECTIVE = 'perfective'
+  IMPERFECTIVE = 'imperfective'
+  PROGRESSIVE = 'progressive'
+  NECESSITATIVE = 'necessitative'
+  FUTURE = 'future'
+  IMPOTENTIAL = 'impotential'
+  CONDITIONAL = 'conditional'
 
 def get_copula_processor(copula):
   return {
@@ -53,10 +59,16 @@ def get_copula_processor(copula):
     Copula.ZERO: zero,
     Copula.TOBE: tobe,
     Copula.PERSONAL: personal,
-    Copula.PERFECT: past,
+    Copula.PERFECTIVE: perfective,
+    Copula.IMPERFECTIVE: imperfective,
+    Copula.PROGRESSIVE: progressive,
+    Copula.NECESSITATIVE: necessitative,
+    Copula.FUTURE: future,
+    Copula.IMPOTENTIAL: impotential,
+    Copula.CONDITIONAL: conditional,
   }.get(copula)
 
-def zero(subject, predicate, delimiter):
+def zero(predicate, person=Person.THIRD, is_plural=False):
   '''
   #### zero copula
   is the rule for third person, as in hungarian
@@ -74,14 +86,19 @@ def zero(subject, predicate, delimiter):
 
   ✎︎ tests
   ```python
-  >>> zero('abbas', 'yolcu', '-')
-  'abbas-yolcu'
+  >>> zero('yolcu')
+  'yolcu'
 
-  ```
+ ```
   '''
-  return join(subject, delimiter, predicate)
+  return predicate
 
-def negative(subject, predicate, delimiter):
+def negative(
+  predicate,
+  person=Person.THIRD,
+  is_plural=False,
+  delimiter=Suffix.DELIMITER,
+):
   '''
   #### negative
   negation is indicated by the negative copula değil. 
@@ -97,14 +114,18 @@ def negative(subject, predicate, delimiter):
 
   ✎︎ tests
   ```python
-  >>> negative('abbas', 'yolcu', '-')
-  'abbas-yolcu-değil'
+  >>> negative('yolcu')
+  'yolcu değil'
 
   ```
   '''
-  return join(subject, delimiter, predicate, delimiter, Suffix.NEGATIVE)
+  return join(predicate, delimiter, Suffix.NEGATIVE)
 
-def tobe(subject, predicate, delimiter):
+def tobe(
+  predicate,
+  person=Person.THIRD,
+  is_plural=False,
+):
   '''
   ### tobe
   turkish "to be" as regular/auxiliary verb (olmak).
@@ -118,14 +139,12 @@ def tobe(subject, predicate, delimiter):
 
   ✎︎ tests
   ```python
-  >>> tobe('abbas', 'yolcu', '-')
-  'abbas-yolcudur'
-
-  >>> tobe('abbas', 'üzüm', '-')
-  'abbas-üzümdür'
-
-  >>> tobe('evlerinin-önü', 'yonca', '-')
-  'evlerinin-önü-yoncadır'
+  >>> tobe('yolcu')
+  'yolcudur'
+  >>> tobe('üzüm')
+  'üzümdür'
+  >>> tobe('yonca')
+  'yoncadır'
 
   ```
   '''
@@ -141,20 +160,14 @@ def tobe(subject, predicate, delimiter):
     if sound in vowels:
       break
 
-  parts = (
+  return skip_falsy_and_join(
     predicate,
     Suffix.D,
     affix.value,
     Suffix.R,
   )
 
-  return join(
-    subject,
-    delimiter,
-    join(*filter(is_truthy, parts))
-  )
-
-def personal(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def personal(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### personification copula
 
@@ -167,24 +180,20 @@ def personal(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
 
   ✎︎ tests
   ```python
-  >>> personal('ben', 'uçak', '-', Person.FIRST, is_plural=False)
-  'ben-uçağım'
+  >>> personal('uçak', Person.FIRST, is_plural=False)
+  'uçağım'
 
-  >>> personal('sen', 'oralı', '-', Person.SECOND, is_plural=False)
-  'sen-oralısın'
+  >>> personal('oralı', Person.SECOND, is_plural=False)
+  'oralısın'
 
-  >>> personal('aynı', 'gezegenli', '-', Person.FIRST, is_plural=True)
-  'aynı-gezegenliyiz'
+  >>> personal('gezegenli', Person.FIRST, is_plural=True)
+  'gezegenliyiz'
 
   ```
   '''
-  return join(
-    subject,
-    delimiter,
-    impersonate(predicate, whom, is_plural, in_past=False)
-  )
+  return impersonate(predicate, whom, is_plural, in_past=False)
 
-def inferential(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def inferential(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### inferential mood (-miş in turkish)
   it is used to convey information about events
@@ -200,20 +209,20 @@ def inferential(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
 
   ✎︎ tests
   ```python
-  >>> inferential('sen', 'öğretmen', ' ', Person.SECOND, is_plural=False)
-  'sen öğretmenmişsin'
+  >>> inferential('öğretmen', Person.SECOND, is_plural=False)
+  'öğretmenmişsin'
 
-  >>> inferential('sen', 'üzül', ' ', Person.SECOND, is_plural=False)
-  'sen üzülmüşsün'
+  >>> inferential('üzül', Person.SECOND, is_plural=False)
+  'üzülmüşsün'
 
-  >>> inferential('ben', 'robot', ' ', Person.FIRST, is_plural=False)
-  'ben robotmuşum'
+  >>> inferential('robot', Person.FIRST, is_plural=False)
+  'robotmuşum'
 
-  >>> inferential('o', 'robot', ' ', Person.THIRD, is_plural=False)
-  'o robotmuş'
+  >>> inferential('robot', Person.THIRD, is_plural=False)
+  'robotmuş'
 
-  >>> inferential('o', 'ada', ' ', Person.THIRD, is_plural=False)
-  'o adaymış'
+  >>> inferential('ada', Person.THIRD, is_plural=False)
+  'adaymış'
 
   ```
   '''
@@ -230,8 +239,6 @@ def inferential(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
   )
 
   return skip_falsy_and_join(
-    subject,
-    delimiter,
     predicate,
 
     # combinative consontant ⟨y⟩
@@ -240,7 +247,7 @@ def inferential(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
     impersonate(inference_suffix, whom, is_plural),
   )
 
-def conditional(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def conditional(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### inferential mood (-isem in turkish)
   It is a grammatical mood used to express a proposition whose
@@ -255,12 +262,12 @@ def conditional(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
 
   ✎︎ tests
   ```python
-  >>> conditional('ben', 'elma', '-', Person.FIRST, is_plural=False)
-  'ben-elmaysam'
-  >>> conditional('sen', 'üzüm', '-', Person.SECOND, is_plural=False)
-  'sen-üzümsen'
-  >>> conditional('onlar', 'bıçak', '-', Person.THIRD, is_plural=True)
-  'onlar-bıçaklarsa'
+  >>> conditional('elma', Person.FIRST, is_plural=False)
+  'elmaysam'
+  >>> conditional('üzüm', Person.SECOND, is_plural=False)
+  'üzümsen'
+  >>> conditional('bıçak', Person.THIRD, is_plural=True)
+  'bıçaklarsa'
 
   ```
   '''
@@ -281,8 +288,6 @@ def conditional(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
       break
 
   return skip_falsy_and_join(
-    subject,
-    delimiter,
     predicate,
 
     # plural suffix for 3rd person
@@ -298,7 +303,7 @@ def conditional(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
     personification,
   )
 
-def perfective(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def perfective(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### alethic modality (-idi in turkish)
   linguistic modality that indicates modalities of truth,
@@ -314,39 +319,35 @@ def perfective(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False
 
   ✎︎ tests
   ```python
-  >>> perfective('men', 'açık', '-', Person.FIRST, is_plural=False)
-  'men-açıktım'
+  >>> perfective('açık', Person.FIRST, is_plural=False)
+  'açıktım'
 
-  >>> perfective('sen', 'oralı', '-', Person.SECOND, is_plural=False)
-  'sen-oralıydın'
+  >>> perfective('oralı', Person.SECOND, is_plural=False)
+  'oralıydın'
 
-  >>> perfective('aynı', 'dalda', '-', Person.FIRST, is_plural=False)
-  'aynı-daldaydım'
+  >>> perfective('dalda', Person.FIRST, is_plural=False)
+  'daldaydım'
 
-  >>> perfective('aynı', 'dalda', '-', Person.THIRD, is_plural=False)
-  'aynı-daldaydı'
+  >>> perfective('dalda', Person.THIRD, is_plural=False)
+  'daldaydı'
 
-  >>> perfective('aynı', 'dalda', '-', Person.FIRST, is_plural=True)
-  'aynı-daldaydık'
+  >>> perfective('dalda', Person.FIRST, is_plural=True)
+  'daldaydık'
 
-  >>> perfective('aynı', 'dalda', '-', Person.SECOND, is_plural=True)
-  'aynı-daldaydınız'
+  >>> perfective('dalda', Person.SECOND, is_plural=True)
+  'daldaydınız'
 
-  >>> perfective('aynı', 'dalda', '-', Person.THIRD, is_plural=True)
-  'aynı-daldaydılar'
+  >>> perfective('dalda', Person.THIRD, is_plural=True)
+  'daldaydılar'
 
-  >>> perfective('aynı', 'gezegende', '-', Person.THIRD, is_plural=True)
-  'aynı-gezegendeydiler'
+  >>> perfective('gezegende', Person.THIRD, is_plural=True)
+  'gezegendeydiler'
 
   ```
   '''
-  return join(
-    subject,
-    delimiter,
-    impersonate(predicate, whom, is_plural, in_past=True)
-  )
+  return impersonate(predicate, whom, is_plural, in_past=True)
 
-def imperfective(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def imperfective(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### the imperfective (-iyor in turkish)
   grammatical aspect used to describe a situation viewed with interior composition. 
@@ -362,29 +363,29 @@ def imperfective(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fal
 
   ✎︎ tests
   ```python
-  >>> imperfective('men', 'açı', '-', Person.FIRST, is_plural=False)
-  'men-açıyorum'
+  >>> imperfective('açı', Person.FIRST, is_plural=False)
+  'açıyorum'
 
-  >>> imperfective('men', 'açık', '-', Person.FIRST, is_plural=False)
-  'men-açıkıyorum'
+  >>> imperfective('açık', Person.FIRST, is_plural=False)
+  'açıkıyorum'
 
-  >>> imperfective('sen', 'oralı', '-', Person.SECOND, is_plural=False)
-  'sen-oralıyorsun'
+  >>> imperfective('oralı', Person.SECOND, is_plural=False)
+  'oralıyorsun'
 
-  >>> imperfective('aynı', 'dal', '-', Person.THIRD, is_plural=False)
-  'aynı-dalıyor'
+  >>> imperfective('dal', Person.THIRD, is_plural=False)
+  'dalıyor'
 
-  >>> imperfective('aynı', 'dal', '-', Person.FIRST, is_plural=True)
-  'aynı-dalıyoruz'
+  >>> imperfective('dal', Person.FIRST, is_plural=True)
+  'dalıyoruz'
 
-  >>> imperfective('aynı', 'dal', '-', Person.FIRST, is_plural=True)
-  'aynı-dalıyoruz'
+  >>> imperfective('dal', Person.FIRST, is_plural=True)
+  'dalıyoruz'
 
-  >>> imperfective('aynı', 'dal', '-', Person.SECOND, is_plural=True)
-  'aynı-dalıyorsunuz'
+  >>> imperfective('dal', Person.SECOND, is_plural=True)
+  'dalıyorsunuz'
 
-  >>> imperfective('aynı', 'dal', '-', Person.THIRD, is_plural=True)
-  'aynı-dalıyorlar'
+  >>> imperfective('dal', Person.THIRD, is_plural=True)
+  'dalıyorlar'
 
   ```
   '''
@@ -397,13 +398,11 @@ def imperfective(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fal
   )
 
   return join(
-    subject,
-    delimiter,
     predicate,
     impersonate(imperfect_copula, whom, is_plural, in_past=False)
   )
 
-def future(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def future(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### the future tense (-iyor in turkish)
   is a verb form that generally marks the event described by the verb as not
@@ -418,14 +417,14 @@ def future(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
 
   ✎︎ tests
   ```python
-  >>> future('men', 'gel', '-', Person.FIRST, is_plural=False)
-  'men-geleceğim'
+  >>> future('gel', Person.FIRST, is_plural=False)
+  'geleceğim'
 
-  >>> future('men', 'açık', '-', Person.FIRST, is_plural=False)
-  'men-açıkacağım'
+  >>> future('açık', Person.FIRST, is_plural=False)
+  'açıkacağım'
 
-  >>> future('biz', 'gel', '-', Person.FIRST, is_plural=True)
-  'biz-geleceğiz'
+  >>> future('gel', Person.FIRST, is_plural=True)
+  'geleceğiz'
 
   ```
   '''
@@ -434,13 +433,9 @@ def future(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
     Suffix.FUTURE if is_front(predicate) else swap_front_and_back(Suffix.FUTURE),
   )
 
-  return join(
-    subject,
-    delimiter,
-    impersonate(future_copula, whom, is_plural, in_past=False)
-  )
+  return impersonate(future_copula, whom, is_plural, in_past=False)
 
-def progressive(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def progressive(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### progressive tense
 
@@ -450,14 +445,14 @@ def progressive(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
 
   ✎︎ tests
   ```python
-  >>> progressive('men', 'gel', '-', Person.FIRST, is_plural=False)
-  'men-gelmekteyim'
+  >>> progressive('gel', Person.FIRST, is_plural=False)
+  'gelmekteyim'
 
-  >>> progressive('men', 'açık', '-', Person.FIRST, is_plural=False)
-  'men-açıkmaktayım'
+  >>> progressive('açık', Person.FIRST, is_plural=False)
+  'açıkmaktayım'
 
-  >>> progressive('biz', 'gel', '-', Person.FIRST, is_plural=True)
-  'biz-gelmekteyiz'
+  >>> progressive('gel', Person.FIRST, is_plural=True)
+  'gelmekteyiz'
 
   ```
   '''
@@ -468,13 +463,9 @@ def progressive(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
       else swap_front_and_back(Suffix.PROGRESSIVE),
   )
 
-  return join(
-    subject,
-    delimiter,
-    impersonate(progressive_copula, whom, is_plural, in_past=False)
-  )
+  return impersonate(progressive_copula, whom, is_plural, in_past=False)
 
-def necessitative(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def necessitative(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### necessitative copula
 
@@ -486,14 +477,14 @@ def necessitative(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fa
 
   ✎︎ tests
   ```python
-  >>> necessitative('men', 'git', '-', Person.FIRST, is_plural=False)
-  'men-gitmeliyim'
+  >>> necessitative('git', Person.FIRST, is_plural=False)
+  'gitmeliyim'
 
-  >>> necessitative('men', 'açık', '-', Person.FIRST, is_plural=False)
-  'men-açıkmalıyım'
+  >>> necessitative('açık', Person.FIRST, is_plural=False)
+  'açıkmalıyım'
 
-  >>> necessitative('biz', 'uza', '-', Person.FIRST, is_plural=True)
-  'biz-uzamalıyız'
+  >>> necessitative('uza', Person.FIRST, is_plural=True)
+  'uzamalıyız'
 
   ```
   '''
@@ -504,13 +495,9 @@ def necessitative(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fa
       else swap_front_and_back(Suffix.NECESSITY),
   )
 
-  return join(
-    subject,
-    delimiter,
-    impersonate(progressive_copula, whom, is_plural, in_past=False)
-  )
+  return impersonate(progressive_copula, whom, is_plural, in_past=False)
 
-def impotential(subject, predicate, delimiter, whom=Person.THIRD, is_plural=False):
+def impotential(predicate, whom=Person.THIRD, is_plural=False):
   '''
   ### impotential copula
 
@@ -522,29 +509,29 @@ def impotential(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
 
   ✎︎ tests
   ```python
-  >>> impotential('men', 'git', '-', Person.FIRST, is_plural=False)
-  'men-gidemem'
+  >>> impotential('git', Person.FIRST, is_plural=False)
+  'gidemem'
 
-  >>> impotential('sen', 'git', '-', Person.SECOND, is_plural=False)
-  'sen-gidemezsin'
+  >>> impotential('git', Person.SECOND, is_plural=False)
+  'gidemezsin'
 
-  >>> impotential('o', 'git', '-', Person.THIRD, is_plural=False)
-  'o-gidemez'
+  >>> impotential('git', Person.THIRD, is_plural=False)
+  'gidemez'
 
-  >>> impotential('biz', 'git', '-', Person.FIRST, is_plural=True)
-  'biz-gidemeyiz'
+  >>> impotential('git', Person.FIRST, is_plural=True)
+  'gidemeyiz'
 
-  >>> impotential('biz', 'git', '-', Person.FIRST, is_plural=True)
-  'biz-gidemeyiz'
+  >>> impotential('git', Person.FIRST, is_plural=True)
+  'gidemeyiz'
 
-  >>> impotential('siz', 'git', '-', Person.SECOND, is_plural=True)
-  'siz-gidemezsiniz'
+  >>> impotential('git', Person.SECOND, is_plural=True)
+  'gidemezsiniz'
 
-  >>> impotential('onlar', 'git', '-', Person.THIRD, is_plural=True)
-  'onlar-gidemezler'
+  >>> impotential('git', Person.THIRD, is_plural=True)
+  'gidemezler'
 
-  >>> impotential('onlar', 'al', '-', Person.THIRD, is_plural=True)
-  'onlar-alamazlar'
+  >>> impotential('al', Person.THIRD, is_plural=True)
+  'alamazlar'
 
   ```
   '''
@@ -570,8 +557,6 @@ def impotential(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
       break
 
   return skip_falsy_and_join(
-    subject,
-    delimiter,
     voice(predicate),
 
     # combinative consontant ⟨y⟩
@@ -583,29 +568,7 @@ def impotential(subject, predicate, delimiter, whom=Person.THIRD, is_plural=Fals
   )
 
 def first_person_singular(text, in_past=False):
-  '''
-  ```python
-  >>> first_person_singular('uçak')
-  'uçağım'
-
-  >>> first_person_singular('dalda', in_past=False)
-  'daldayım'
-
-  >>> first_person_singular('dalda', in_past=True)
-  'daldaydım'
-
-  >>> first_person_singular('uçak', in_past=True)
-  'uçaktım'
-
-  >>> first_person_singular('yor', in_past=False)
-  'yorum'
-
-  >>> first_person_singular('alur', in_past=True)
-  'alurdum'
-
-  ```
-  '''
-  parts = (
+  return skip_falsy_and_join(
     # last vowel should not be voiced in alethic modality
     text if in_past else voice(text),
 
@@ -623,32 +586,8 @@ def first_person_singular(text, in_past=False):
     Suffix.M,
   )
 
-  return join(*filter(is_truthy, parts))
-
 def second_person_singular(text, in_past=False):
-  '''
-  ```python
-  >>> second_person_singular('uçak')
-  'uçaksın'
-
-  >>> second_person_singular('üzüm', in_past=True)
-  'üzümdün'
-
-  >>> second_person_singular('gel', in_past=True)
-  'geldin'
-
-  >>> second_person_singular('kaç', in_past=True)
-  'kaçtın'
-
-  >>> second_person_singular('humorsuz')
-  'humorsuzsun'
-
-  >>> second_person_singular('üzüm')
-  'üzümsün'
-
-  ```
-  '''
-  parts = (
+  return skip_falsy_and_join(
     text,
 
     # combinative consontant ⟨y⟩
@@ -668,26 +607,9 @@ def second_person_singular(text, in_past=False):
     Suffix.N,
   )
 
-  return join(*filter(is_truthy, parts))
 
 def third_person_singular(text, in_past=False):
-  '''
-  ```python
-  >>> third_person_singular('men')
-  'men'
-
-  >>> third_person_singular('men', in_past=True)
-  'mendi'
-
-  >>> third_person_singular('adam', in_past=True)
-  'adamdı'
-
-  >>> third_person_singular('üzüm', in_past=True)
-  'üzümdü'
-
-  ```
-  '''
-  parts = (
+  return skip_falsy_and_join(
     text,
 
     # combinative consontant ⟨y⟩
@@ -704,23 +626,8 @@ def third_person_singular(text, in_past=False):
       ).value,
   )
 
-  return join(*filter(is_truthy, parts))
-
 def first_person_plural(text, in_past=False):
-  '''
-  ```python
-  >>> first_person_plural('uçak')
-  'uçağız'
-
-  >>> first_person_plural('kale')
-  'kaleyiz'
-
-  >>> first_person_plural('kale', in_past=True)
-  'kaleydik'
-
-  ```
-  '''
-  parts = (
+  return skip_falsy_and_join(
     # last vowel should not be voiced in alethic modality
     text if in_past else voice(text),
 
@@ -739,29 +646,8 @@ def first_person_plural(text, in_past=False):
     Suffix.K if in_past else Suffix.Z
   )
 
-  return join(*filter(is_truthy, parts))
-
 def second_person_plural(text, in_past=False):
-  '''
-  ```python
-  >>> second_person_plural('elma', in_past=False)
-  'elmasınız'
-
-  >>> second_person_plural('elma', in_past=True)
-  'elmaydınız'
-
-  >>> second_person_plural('gezegen', in_past=True)
-  'gezegendiniz'
-
-  >>> second_person_plural('üzüm', in_past=True)
-  'üzümdünüz'
-
-  >>> second_person_plural('ağaç', in_past=True)
-  'ağaçtınız'
-
-  ```
-  '''
-  parts = (
+  return skip_falsy_and_join (
     second_person_singular(text, in_past),
 
     # ⟨a⟩ ⟨i⟩ ⟨u⟩ ⟨ü⟩
@@ -773,30 +659,13 @@ def second_person_plural(text, in_past=False):
     Suffix.Z,
   )
 
-  return join(*filter(is_truthy, parts))
-
 def third_person_plural(text, in_past=False):
-  '''
-  ```python
-  >>> third_person_plural('gezegen')
-  'gezegenler'
-
-  >>> third_person_plural('gezegen')
-  'gezegenler'
-
-  >>> third_person_plural('gezegen', in_past=True)
-  'gezegendiler'
-
-  ```
-  '''
-  parts = (
+  return skip_falsy_and_join(
     third_person_singular(text, in_past),
 
     # -lar or -ler, plural affix
     Suffix.LER if is_front(text) else Suffix.LAR
   )
-
-  return join(*filter(is_truthy, parts))
 
 def impersonate(text, to_whom, is_plural, in_past=False):
   for (person, plurality, processor) in (
@@ -811,8 +680,26 @@ def impersonate(text, to_whom, is_plural, in_past=False):
       and is_plural == plurality:
       return processor(text, in_past)
 
-def predicate(text):
-  return text
+def predicate(
+  text,
+  person=Person.THIRD,
+  copula=Copula.ZERO,
+  is_plural=False,
+):
+  if isinstance(person, str):
+    person = get_enum_member(Person, person)
+
+  if isinstance(copula, str):
+    copula = get_enum_member(Copula, copula)
+
+  try:
+    processor = get_copula_processor(copula)
+  except TypeError:
+    raise Exception(
+      'invalid copula. options: %s' % Copula
+    )
+
+  return processor(text, person, is_plural)
 
 if __name__ == "__main__":
     import doctest

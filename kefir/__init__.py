@@ -28,13 +28,55 @@ Kefir is designed to construct sentences by predicate-logic.
 https://www.wikiwand.com/en/Predicate_(grammar)
 
 ```python
->>> sentence(subject('ali'), predicate('öl'))
-'ali öl'
+>>> ayni = subject('aynı')
+>>> havuc = subject('havuç')
+>>> gel = predicate('gel', 'third', 'perfective')
+>>> yap = predicate('yap', 'third', 'perfective')
+>>> dal = predicate('dal', 'third', 'progressive')
+>>> dal = predicate(dal, 'third', 'perfective')
+
+>>> birisi = subject('yakup')
+>>> [sentence(birisi, eylem) for eylem in (yap, dal,)]
+['yakup yaptı', 'yakup dalmaktaydı']
+
+>>> [sentence(havuc, eylem) for eylem in (gel, yap, dal)]
+['havuç geldi', 'havuç yaptı', 'havuç dalmaktaydı']
+
+>>> sebze = predicate(locative('marul'), 'first', 'perfective', True)
+>>> dal = predicate(locative('dal'), 'first', 'perfective', True)
+>>> [sentence(ayni, eylem) for eylem in (sebze, dal)]
+['aynı maruldaydık', 'aynı daldaydık']
 
 ```
+
+### cases
+
+  - nominative
+  - genitive
+  - dative
+  - accusative
+  - ablative
+  - locative
+
+### copulas
+
+ - negative
+ - zero
+ - tobe
+ - personal
+ - perfective
+ - imperfective
+ - progressive
+ - necessitative
+ - future
+ - impotential
+ - conditional
+
 '''
 from .subject import subject
-from .predication import predicate
+from .predication import predicate, Copula
+from .case import locative, genitive
+from .functional import enum_values
 
 def sentence(subject, predicate, delimiter=' '):
   return delimiter.join((subject, predicate))
