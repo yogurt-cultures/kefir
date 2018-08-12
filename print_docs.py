@@ -28,9 +28,11 @@ for module in modules_to_document:
 
   if module_name == 'kefir':
     print('<details open>')
+    print('<summary open>%s</summary>' % module_name)
   else:
     print('<details>')
-  print('<summary>%s</summary>' % module_name)
+    print('<summary>%s</summary>' % module_name)
+
   for doc in docs:
     tab = '  '
     for line in doc.splitlines():
