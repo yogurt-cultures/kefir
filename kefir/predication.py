@@ -48,6 +48,7 @@ class Copula(Enum):
   PERFECTIVE = 'perfective'
   IMPERFECTIVE = 'imperfective'
   PROGRESSIVE = 'progressive'
+  PROGRESSIVE_TO_PERFECTIVE = 'progressive_to_perfective'
   NECESSITATIVE = 'necessitative'
   FUTURE = 'future'
   IMPOTENTIAL = 'impotential'
@@ -62,6 +63,7 @@ def get_copula_processor(copula):
     Copula.PERFECTIVE: perfective,
     Copula.IMPERFECTIVE: imperfective,
     Copula.PROGRESSIVE: progressive,
+    Copula.PROGRESSIVE_TO_PERFECTIVE: progressive_to_perfective,
     Copula.NECESSITATIVE: necessitative,
     Copula.FUTURE: future,
     Copula.IMPOTENTIAL: impotential,
@@ -448,8 +450,8 @@ def progressive(predicate, whom=Person.THIRD, is_plural=False):
   >>> progressive('gel', Person.FIRST, is_plural=False)
   'gelmekteyim'
 
-  >>> progressive('açık', Person.FIRST, is_plural=False)
-  'açıkmaktayım'
+  >>> progressive('acık', Person.FIRST, is_plural=False)
+  'acıkmaktayım'
 
   >>> progressive('gel', Person.FIRST, is_plural=True)
   'gelmekteyiz'
@@ -464,6 +466,37 @@ def progressive(predicate, whom=Person.THIRD, is_plural=False):
   )
 
   return impersonate(progressive_copula, whom, is_plural, in_past=False)
+
+def progressive_to_perfective(predicate, whom=Person.THIRD, is_plural=False):
+  '''
+  ### whole process from progressive to perfective form 
+
+  ✎︎ examples
+  gülmekteydim (i am in the process of laughing)
+  ölmektelerdi (they are in the process of dying 👾)
+
+  ✎︎ tests
+  ```python
+  >>> progressive_to_perfective('gel', Person.FIRST, is_plural=False)
+  'gelmekteydim'
+
+  >>> progressive_to_perfective('açık', Person.THIRD, is_plural=False)
+  'açıkmaktaydı'
+
+  >>> progressive_to_perfective('al', Person.FIRST, is_plural=True)
+  'almaktaydık'
+
+  ```
+  '''
+
+  progressive_to_perfective_copula = join(
+    predicate,
+    Suffix.PROGRESSIVE
+      if is_front(predicate)
+      else swap_front_and_back(Suffix.PROGRESSIVE),
+  )
+
+  return impersonate(progressive_to_perfective_copula, whom, is_plural, in_past=True)
 
 def necessitative(predicate, whom=Person.THIRD, is_plural=False):
   '''
