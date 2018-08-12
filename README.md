@@ -13,8 +13,9 @@ Kefir is a natural language processing kit for Turkic languages, and maybe Finni
 
 - Berk Buzcu (8-bit artwork)
 - Serdar Açıkyol (Illustration)
-- Fatih Erikli (Phonological processes, Predicate Logic)
-- Umut Karcı (Packaging)
+- Fatih Erikli (Phonological Processes, Predicate Logic)
+- Umut Karcı (Packaging and Versioning)
+- Armagan Amcalar (Javascript Port)
 
 # Contribution guide
 - Don't load a fixture, code is our data.
