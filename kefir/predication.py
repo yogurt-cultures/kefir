@@ -7,7 +7,7 @@ features of turkish grammar.
 
 TODO: Remove unused imports.
 '''
-from enum import Enum, auto
+from enum import Enum
 
 from .functional import (join,
                          is_truthy,
