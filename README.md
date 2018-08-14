@@ -5,7 +5,7 @@
 
 ![Logo](https://avatars1.githubusercontent.com/u/42190640?s=200&v=4)
 
-Yogurt is a free software community that establised in `Mustafa Akgul Ozgul Yazılım Kampı` in 2018.
+Yogurt is a free software community established in `Mustafa Akgul Özgür Yazılım Kampı` in 2018.
 
 Kefir is a natural language processing kit for Turkic languages, and maybe Finnish and Hungarian in phonology.
 
