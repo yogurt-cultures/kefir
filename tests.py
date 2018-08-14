@@ -8,10 +8,10 @@ from kefir import phonology
 
 def run_tests():
   modules_to_test = [
-      kefir,
-      predication,
-      case,
-      phonology,
+    kefir,
+    predication,
+    case,
+    phonology,
   ]
 
   testSuite = unittest.TestSuite()
@@ -20,9 +20,9 @@ def run_tests():
       testSuite.addTest(doctest.DocTestSuite(module))
 
   unittest.TextTestRunner(
-          verbosity=2
+    verbosity=2
   ).run(
-          testSuite
+    testSuite
   )
 
 if __name__ == "__main__":

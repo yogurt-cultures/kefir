@@ -89,6 +89,9 @@ def zero(predicate, person=Person.THIRD, is_plural=False):
   >>> zero('yolcu')
   'yolcu'
 
+  >>> zero('umut')
+  'umut'
+
  ```
   '''
   return predicate
