@@ -3,7 +3,7 @@
 
 ![Logo](https://avatars1.githubusercontent.com/u/42190640?s=200&v=4)
 
-Yogurt is a free software community that establised in `Mustafa Akgul Ozgul Yazılım Kampı` in 2018.
+Yogurt is a free software community established at Mustafa Akgül Free Software Camp of 2018.
 
 Kefir is a natural language processing kit for Turkic languages, and maybe Finnish and Hungarian in phonology.
 
@@ -19,14 +19,13 @@ Kefir is a natural language processing kit for Turkic languages, and maybe Finni
 - Don't leave a comment! Docstrings are only for the context and test.
 - Be nice 🦄
 
-# Examples
-
+# Usage
 There are two competing notions of the predicate in theories of grammar.
 The competition between these two concepts has generated confusion concerning
 the use of the term predicate in theories of grammar.
 
-Kefir is designed to construct sentences by predicate-logic.  
-https://www.wikiwand.com/en/Predicate_(grammar)
+Kefir is designed to construct sentences by using
+[predicate-logic](https://www.wikiwand.com/en/Predicate_(grammar)).
 
 ## Combining predicates (birleşik yapılı fiiller)
 
@@ -52,7 +51,7 @@ https://www.wikiwand.com/en/Predicate_(grammar)
 
 ```
 
-### cases
+### Cases
 
   - nominative
   - genitive
@@ -61,7 +60,7 @@ https://www.wikiwand.com/en/Predicate_(grammar)
   - ablative
   - locative
 
-### copulas
+### Copulas
 
  - negative
  - zero
