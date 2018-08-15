@@ -680,6 +680,17 @@ def impersonate(text, to_whom, is_plural, in_past=False):
       and is_plural == plurality:
       return processor(text, in_past)
 
+def combinator(copula, text, whom=Person.THIRD, is_plural=False):
+  try:
+    for i in copula:
+      text = predicate(text, whom, i, is_plural)
+  except TypeError:
+    raise Exception(
+      'invalid copula. options: %s' % Copula
+    )
+
+  return text
+
 def predicate(
   text,
   person=Person.THIRD,
@@ -689,9 +700,16 @@ def predicate(
   if isinstance(person, str):
     person = get_enum_member(Person, person)
 
+  # try:
+  #   Copula(copula)
+  # except ValueError:
+  #   return combinator(copula, text, person, is_plural)
+
   if isinstance(copula, str):
     copula = get_enum_member(Copula, copula)
-
+  elif isinstance(copula, tuple):
+    return combinator(copula, text, person, is_plural)
+  
   try:
     processor = get_copula_processor(copula)
   except TypeError:
