@@ -32,7 +32,9 @@ Turkish has 9 more cases (will be somehow implemented in future).
   https://en.wikibooks.org/wiki/Turkish/Cases
 
 '''
+from enum import Enum
 from .phonology import is_front, is_back
+from .suffix import Suffix
 from .functional import join, NOTHING, is_truthy, skip_falsy_and_join
 from .phonology import (get_last_vowel,
                         get_vowel_symbol,
