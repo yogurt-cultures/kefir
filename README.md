@@ -5,31 +5,18 @@
 
 ![Logo](https://avatars1.githubusercontent.com/u/42190640?s=200&v=4)
 
-Yogurt is a free software community established in `Mustafa Akgul Özgür Yazılım Kampı` in 2018.
+=======
 
 Kefir is a natural language processing kit for Turkic languages, and maybe Finnish and Hungarian in phonology.
 
-# Credits
-
-- Berk Buzcu (8-bit artwork)
-- Serdar Açıkyol (Illustration)
-- Fatih Erikli (Phonological Processes, Predicate Logic)
-- Armagan Amcalar ([Javascript Port](https://github.com/yogurt-cultures/kefir-js))
-- Umut Karcı (Packaging and Versioning)
-
-# Contribution guide
-- Don't load a fixture, code is our data.
-- Don't leave a comment! Docstrings are only for the context and test.
-- Be nice 🦄
-
-# How to use
+# Usage
 
 There are two competing notions of the predicate in theories of grammar.
 The competition between these two concepts has generated confusion concerning
 the use of the term predicate in theories of grammar.
 
-Kefir is designed to construct sentences by predicate-logic.  
-https://www.wikiwand.com/en/Predicate_(grammar)
+Kefir is designed to construct sentences by using
+[predicate-logic](https://www.wikiwand.com/en/Predicate_(grammar)).
 
 ```python
 >>> ayni = subject('aynı')
@@ -53,7 +40,7 @@ https://www.wikiwand.com/en/Predicate_(grammar)
 
 ```
 
-### cases
+### Cases
 
 - nominative
 - genitive
@@ -62,7 +49,7 @@ https://www.wikiwand.com/en/Predicate_(grammar)
 - ablative
 - locative
 
-### copulas
+### Copulas
 
  - negative
  - zero
@@ -82,7 +69,7 @@ https://www.wikiwand.com/en/Predicate_(grammar)
 
 # Grammatical Cases
 
-Implemented only six grammatical cases.
+Implemented 6 grammatical cases:
 
 - Nominative
 - Genitive
@@ -91,7 +78,7 @@ Implemented only six grammatical cases.
 - Ablative
 - Locative
 
-Turkish has 9 more cases.
+Turkish has 9 more:
 
 - Essive
 - Instrumental
@@ -103,25 +90,23 @@ Turkish has 9 more cases.
 - Conditional
 - Possesive
 
-Detailed explaination:
-https://en.wikibooks.org/wiki/Turkish/Cases
+📖 Read more on: [Turkish Cases](https://en.wikibooks.org/wiki/Turkish/Cases).
 
 TODO: Enum'lardaki rakamlar yerine auto() kullanılmalı.
 
-## nominative case (yalın in turkish)
-the simplest grammatical case, there's no suffix to
-affix in that case.
+## Nominative Case ('Yalın' in Turkish)
 
-nominative comes from latin cāsus nominātīvus 
-means case for naming.
+The simplest grammatical case, there's no suffix to affix in that case.
 
+Nominative comes from Latin cāsus nominātīvus means case for naming.
 
-## ablative case (ayrılma in turkish)
-a grammatical case for nouns, pronouns and adjectives in
+## Ablative Case ('Ayrılma' in Turkish)
+
+A grammatical case for nouns, pronouns and adjectives in
 the grammar of various languages; it is sometimes used to
 express motion away from something, among other uses.
 
-✎︎ examples
+✎︎ Examples:
 ```
 adalar[dan] geldim
 merkez[den] geçtim
@@ -129,27 +114,27 @@ teyit[ten] geçtim
 açlık[tan] öldüm
 ```
 
+## Accusative ('İlgi' in Turkish)
 
-## accusative (ilgi in turkish)
 The accusative case (abbreviated acc) of a noun is the
 grammatical case used to mark the direct object of a
 transitive verb. The same case is used in many
-languages for the objects of (some or all) prepositions. 
+languages for the objects of (some or all) prepositions.
 
-✎︎ examples
+✎︎ Examples:
 ```
 aday[ı] yedim
 evim[i] yaptım
 üzüm[ü] pişirdim
 ```
 
+## Genitive Case ('Genitifler' in Turkish)
 
-## genitive case (genitifler in turkish)
 In grammar, the genitive is the grammatical case
 that marks a word, usually a noun, as modifying
 another word, also usually a noun.
 
-✎︎ examples
+✎︎ Examples:
 ```
 hanımelinin çiçeği (flower of a plant called hanımeli)
 kadının ayakkabısı (shoes of the woman)
@@ -157,24 +142,24 @@ kadının ayakkabısı (shoes of the woman)
 mari[i] nie ma w domu (maria is not at home)
 ```
 
+## Dative Case ('Yönelme' in Turkish)
 
-## dative case (yönelme in turkish)
 In some languages, the dative is used to mark the
 indirect object of a sentence.
 
-✎︎ examples
+✎︎ Examples:
 ```
 marya yakup'a bir drink verdi (maria gave jacob a drink)
 maria jacobī potum dedit (maria gave jacob a drink)
 ```
 
+## Locative Case ('Bulunma' in Turkish)
 
-## locative case (bulunma in turkish)
 Locative is a grammatical case which indicates a location.
 It corresponds vaguely to the English prepositions "in",
-"on", "at", and "by". 
+"on", "at", and "by".
 
-✎︎ examples
+✎︎ Examples:
 ```
 bahçe[de] hanımeli var.
 yorum[da] iyi beatler var.
@@ -185,7 +170,7 @@ kalem[de] güzel uç var.
 <details>
 <summary>kefir.phonology</summary>
 
-# Turkish phonology
+# Turkish Phonology
 
 In Hungarian, Finnish, and Turkic languages
 vowel sounds are organized in a concept called
@@ -207,8 +192,9 @@ sound in the mouth.
 
 TODO: Document consonant harmony.
 
-#### swap_front_and_back
-Swaps front sounds to back, and vice versa
+#### \#swap_front_and_back
+
+Swaps front sounds to back, and vice versa.
 
 ```python
 >>> swap_front_and_back('acak')
@@ -225,58 +211,59 @@ Swaps front sounds to back, and vice versa
 
 ```
 
+## Voicing or Sonorization ('Yumuşama' in Turkish)
 
-## Voicing or sonorization (yumuşama in turkish)
-to make pronouncation easier, nouns ending
-with these sounds.
+To make pronouncation easier, nouns ending
+with these sounds:
 
 ```
-⟨p⟩ ⟨ç⟩ ⟨t⟩ ⟨k⟩ 
+⟨p⟩ ⟨ç⟩ ⟨t⟩ ⟨k⟩
 ```
 
-may be softened by replacing them in order:
+May be softened by replacing them in order:
 
 ```
 ⟨b⟩ ⟨c⟩ ⟨d⟩ ⟨ğ⟩
 ```
 
-✎︎ examples
+✎︎ Examples:
 ```
 ço⟨p⟩un → ço⟨b⟩un
 ağa⟨ç⟩ın → ağa⟨c⟩n
-kağı⟨t⟩ın → kağı⟨d⟩ın 
+kağı⟨t⟩ın → kağı⟨d⟩ın
 ren⟨k⟩in → ren⟨g⟩in
 ```
 
-✎︎ examples in other languages
+✎︎ Examples in other languages:
 ```
 li⟨f⟩e → li⟨v⟩e
 stri⟨f⟩e → stri⟨v⟩e
 proo⟨f⟩ → pro⟨v⟩e
 ```
 
+## Devoicing or Desonorization ('Sertleşme' in Turkish)
 
-## Devoicing or desonorization (sertleşme in turkish)
-to make pronouncation easier, nouns ending with
+To make pronouncation easier, nouns ending with
 these sounds:
 ```
 ⟨p⟩ ⟨ç⟩ ⟨t⟩ ⟨k⟩
 ```
 
-may be hardened by replacing them in order:
+May be hardened by replacing them in order:
+
 ```
 ⟨b⟩ ⟨c⟩ ⟨d⟩ ⟨ğ⟩
 ```
 
-✎︎ examples
+✎︎ Examples:
 ```
 ço⟨p⟩un → ço⟨b⟩un
 ağa⟨ç⟩ın → ağa⟨c⟩n
-kağı⟨t⟩ın → kağı⟨d⟩ın 
+kağı⟨t⟩ın → kağı⟨d⟩ın
 ren⟨k⟩in → ren⟨g⟩in
 ```
 
-✎︎ examples in other languages
+✎︎ Examples in Other Languages:
 ```
 dogs → dogs ([ɡz])
 missed → missed ([st])
@@ -291,65 +278,64 @@ prośba → prɔʑba
 
 # Turkish Predication and Copula
 
-turkish language copulas, which are called as ek-eylem which
-literally means 'suffix-verb' are one of the most distinct
-features of turkish grammar.
+Turkish language copulas, called 'ek-eylem' (literally 'suffix-verb'),
+are one of the most distinct features of Turkish grammar.
 
 TODO: Remove unused imports.
 
-#### zero copula
-is the rule for third person, as in hungarian
-and russian. that means two nouns, or a noun and an
-adjective can be juxtaposed to make a sentence without
-using any copula. third person plural might be indicated
-with the use of plural suffix "-lar/-ler". 
+#### Zero Copula
 
-✎︎ examples
+Zero copula is the rule for third person, as in Hungarian
+and Russian. That means two nouns, or a noun and an
+adjective can be juxtaposed to make a sentence without
+using any copula. Third person plural might be indicated
+with the use of plural suffix "-lar/-ler".
+
+✎︎ Examples:
 ```
 yogurt kültür (yogurt [is-a] culture)
 abbas yolcu (abbas [is-a] traveller)
 evlerinin önü yonca (the front of their home [is-a] plant called yonca)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> zero('yolcu')
 'yolcu'
 
  ```
 
+#### Negative
 
-#### negative
-negation is indicated by the negative copula değil. 
-değil is never used as a suffix, but it takes suffixes
-according to context. 
+Negation is indicated by the negative copula 'değil'.
+'Değil' is never used as a suffix, but it takes suffixes according to context.
 
-✎︎ examples
+✎︎ Examples:
 ```
 yogurt kültür değildir (yogurt [is-not-a] culture)
 abbas yolcu değildir (abbas [is-not-a] traveller)
 evlerinin önü yonca değildir (the front of their home [is-not-a] yonca)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> negative('yolcu')
 'yolcu değil'
 
 ```
 
+### To Be
 
-### tobe
-turkish "to be" as regular/auxiliary verb (olmak).
+Turkish "to be" as regular/auxiliary verb ('olmak').
 
-✎︎ examples
+✎︎ Examples:
 ```
 yogurt kültürdür (yogurt [is] culture)
 abbas yolcudur (abbas [is] traveller)
 evlerinin önü yoncadır (the front of their home [is] plant called yonca)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> tobe('yolcu')
 'yolcudur'
@@ -361,16 +347,16 @@ evlerinin önü yoncadır (the front of their home [is] plant called yonca)
 ```
 
 
-### personification copula
+### Personification Copula
 
-✎︎ examples
+✎︎ Examples:
 ```
 ben buralıyım (i'm from here)
 sen oralısın (you're from over there)
 aynı gezegenliyiz (we're from same planet)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> personal('uçak', Person.FIRST, is_plural=False)
 'uçağım'
@@ -383,12 +369,12 @@ aynı gezegenliyiz (we're from same planet)
 
 ```
 
+### Inferential Mood ('-miş' in Turkish)
 
-### inferential mood (-miş in turkish)
-it is used to convey information about events
-which were not directly observed or were inferred by the speaker. 
+Inferential mood is used to convey information about events
+which were not directly observed or were inferred by the speaker.
 
-✎︎ examples
+✎︎ Examples:
 ```
 elmaymışım (i was an apple as i've heard)
 üzülmüşsün (you were sad as i've heard)
@@ -396,7 +382,7 @@ doktormuş (he/she/it was a doctor as i've heard)
 üzümmüşsün (you were a grape as i've heard)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> inferential('öğretmen', Person.SECOND, is_plural=False)
 'öğretmenmişsin'
@@ -415,19 +401,19 @@ doktormuş (he/she/it was a doctor as i've heard)
 
 ```
 
+### Inferential Mood ('-isem' in Turkish)
 
-### inferential mood (-isem in turkish)
-It is a grammatical mood used to express a proposition whose
+Inferential mood is a grammatical mood used to express a proposition whose
 validity is dependent on some condition, possibly counterfactual.
 
-✎︎ examples
+✎︎ Examples:
 ```
 elmaysam (if i am an apple)
 üzümsen (if you are a grape)
 bıçaklarsa (if they are a knife)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> conditional('elma', Person.FIRST, is_plural=False)
 'elmaysam'
@@ -438,20 +424,20 @@ bıçaklarsa (if they are a knife)
 
 ```
 
+### Alethic Modality ('-idi' in Turkish)
 
-### alethic modality (-idi in turkish)
-linguistic modality that indicates modalities of truth,
+Linguistic modality that indicates modalities of truth,
 in particular the modalities of logical necessity,
 possibility or impossibility.
 
-✎︎ examples
+✎︎ Examples:
 ```
 elmaydım (i was an apple)
 üzümdün (you were a grape)
 doktordu (he/she/it was a doctor)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> perfective('açık', Person.FIRST, is_plural=False)
 'açıktım'
@@ -479,20 +465,20 @@ doktordu (he/she/it was a doctor)
 
 ```
 
+### The Imperfective ('-iyor' in Turkish)
 
-### the imperfective (-iyor in turkish)
-grammatical aspect used to describe a situation viewed with interior composition. 
-describes ongoing, habitual, repeated, or similar semantic roles, 
+Grammatical aspect used to describe a situation viewed with interior composition.
+It describes ongoing, habitual, repeated, or similar semantic roles,
 whether that situation occurs in the past, present, or future.
 
-✎︎ examples
+✎︎ Examples:
 ```
 gidiyorum (i'm going)
 kayıyor (he's skating)
 üzümlüyor (he's graping)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> imperfective('açı', Person.FIRST, is_plural=False)
 'açıyorum'
@@ -520,19 +506,19 @@ kayıyor (he's skating)
 
 ```
 
+### The Future Tense ('-iyor' in Turkish)
 
-### the future tense (-iyor in turkish)
-is a verb form that generally marks the event described by the verb as not
-having happened yet, but expected to happen in the future.
+The future tense is a verb form that generally marks the event described by the
+verb as not having happened yet, but expected to happen in the future.
 
-✎︎ examples
+✎︎ Examples:
 ```
 gidecek (he'll go)
 ölecek (he'll die)
 can alacak (he'll kill someone)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> future('gel', Person.FIRST, is_plural=False)
 'geleceğim'
@@ -545,14 +531,13 @@ can alacak (he'll kill someone)
 
 ```
 
+### Progressive Tense
 
-### progressive tense
-
-✎︎ examples
+✎︎ Examples:
 gülmekteyim (i am in the process of laughing)
 ölmekteler (they are in the process of dying 👾)
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> progressive('gel', Person.FIRST, is_plural=False)
 'gelmekteyim'
@@ -565,16 +550,15 @@ gülmekteyim (i am in the process of laughing)
 
 ```
 
+### Necessitative Copula
 
-### necessitative copula
-
-✎︎ examples
+✎︎ Examples:
 ```
 gitmeliyim (i must go)
 kaçmalıyım (i must run away)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> necessitative('git', Person.FIRST, is_plural=False)
 'gitmeliyim'
@@ -587,16 +571,15 @@ kaçmalıyım (i must run away)
 
 ```
 
+### Impotential Copula
 
-### impotential copula
-
-✎︎ examples
+✎︎ Examples:
 ```
 gidemem (i cannot come)
 kaçamayız (we cannot run away)
 ```
 
-✎︎ tests
+✎︎ Tests:
 ```python
 >>> impotential('git', Person.FIRST, is_plural=False)
 'gidemem'
@@ -623,5 +606,29 @@ kaçamayız (we cannot run away)
 'alamazlar'
 
 ```
+
+</details>
+
+<details>
+<summary>kefir.meta</summary>
+
+# Contribution Guide
+
+- Don't load a fixture, code is our data.
+- Don't leave a comment! Docstrings are only for the context and test.
+- Be nice 🦄
+
+# Credits
+
+- Berk Buzcu (8-bit artwork)
+- Serdar Açıkyol (Illustration)
+- Fatih Erikli (Phonological Processes, Predicate Logic)
+- Armagan Amcalar ([Javascript Port](https://github.com/yogurt-cultures/kefir-js))
+- Umut Karcı (Packaging and Versioning)
+- Kerem Bozdaş (Editing)
+
+# License
+
+This project is licensed under the terms of the [MIT license](https://github.com/yogurt-cultures/kefir/blob/master/LICENSE).
 
 </details>

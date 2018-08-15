@@ -7,7 +7,7 @@ features of turkish grammar.
 
 TODO: Remove unused imports.
 '''
-from enum import Enum, auto
+from enum import Enum
 
 from .functional import (join,
                          is_truthy,
@@ -88,6 +88,9 @@ def zero(predicate, person=Person.THIRD, is_plural=False):
   ```python
   >>> zero('yolcu')
   'yolcu'
+
+  >>> zero('umut')
+  'umut'
 
  ```
   '''
