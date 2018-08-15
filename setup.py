@@ -1,3 +1,22 @@
+'''
+# Release notes
+
+```
+TODO: release 0.1.1
+-----------------------------------------+
+             |           version         |
+day  | month | year | major  minor patch |   
+-----------------------------------------+
+16     AUG     2018     0       1     1
+      | language and dialect abstraction
+      | dialects: çuvaşca, azerice
+
+13     AUG     2018     0       1     0
+      | initial implementation of
+      | phonology, grammatical cases, predication
+```
+
+'''
 from setuptools import setup, find_packages
 import re
 

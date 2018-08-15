@@ -41,4 +41,3 @@ for module in modules_to_document:
       else:
         print(line)
   print('</details>')
-

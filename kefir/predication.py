@@ -1,11 +1,9 @@
 '''
-# Turkish Predication and Copula
+# Turkish Predication and Copula (Yüklemler)
 
 turkish language copulas, which are called as ek-eylem which
 literally means 'suffix-verb' are one of the most distinct
 features of turkish grammar.
-
-TODO: Remove unused imports.
 '''
 from enum import Enum
 
@@ -16,7 +14,6 @@ from .functional import (join,
                          identity,
                          get_enum_member)
 from .suffix import Suffix
-from .case import accusative
 from .phonology import (get_last_vowel,
                         get_vowel_symbol,
                         Back,

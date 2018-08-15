@@ -19,7 +19,7 @@ Kefir is a natural language processing kit for Turkic languages, and maybe Finni
 - Don't leave a comment! Docstrings are only for the context and test.
 - Be nice 🦄
 
-# How to use
+# Examples
 
 There are two competing notions of the predicate in theories of grammar.
 The competition between these two concepts has generated confusion concerning
@@ -27,6 +27,8 @@ the use of the term predicate in theories of grammar.
 
 Kefir is designed to construct sentences by predicate-logic.  
 https://www.wikiwand.com/en/Predicate_(grammar)
+
+## Combining predicates (birleşik yapılı fiiller)
 
 ```python
 >>> ayni = subject('aynı')
