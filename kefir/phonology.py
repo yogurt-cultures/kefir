@@ -236,7 +236,7 @@ def voice(text):
   ✎︎ examples
   ```
   ço⟨p⟩un → ço⟨b⟩un
-  ağa⟨ç⟩ın → ağa⟨c⟩n
+  ağa⟨ç⟩ın → ağa⟨c⟩ın
   kağı⟨t⟩ın → kağı⟨d⟩ın 
   ren⟨k⟩in → ren⟨g⟩in
   ```
@@ -271,7 +271,7 @@ def devoice(text):
   ✎︎ examples
   ```
   ço⟨p⟩un → ço⟨b⟩un
-  ağa⟨ç⟩ın → ağa⟨c⟩n
+  ağa⟨ç⟩ın → ağa⟨c⟩ın
   kağı⟨t⟩ın → kağı⟨d⟩ın 
   ren⟨k⟩in → ren⟨g⟩in
   ```
