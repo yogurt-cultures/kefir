@@ -5,7 +5,7 @@
 TODO: release 0.1.1
 -----------------------------------------+
              |           version         |
-day  | month | year | major  minor patch |   
+day  | month | year | major  minor patch |
 -----------------------------------------+
 16     AUG     2018     0       1     1
       | language and dialect abstraction
@@ -20,7 +20,7 @@ day  | month | year | major  minor patch |
 from setuptools import setup, find_packages
 import re
 
-with open("README.md") as f:
+with open("README.md", encoding='utf-8') as f:
     readme = f.read()
 
 TAG_RE = re.compile(r'<[^>]+>')
