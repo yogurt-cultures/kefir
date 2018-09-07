@@ -44,12 +44,14 @@ from .phonology import (get_last_vowel,
                         voice,
                         is_front,
                         ends_with_consonant,
+                        harmony,
                         SOFTENING_SOUNDS,
                         VOICELESS_CONSONANTS,
                         UNROUNDED_BACK_VOWELS,
                         ROUNDED_BACK_VOWELS,
                         UNROUNDED_FRONT_VOWELS,
                         ROUNDED_FRONT_VOWELS)
+from .predication import Person
 
 class GrammaticalCase(Enum):
   NOMINATIVE = 1
@@ -75,7 +77,7 @@ def nominative(text):
   the simplest grammatical case, there's no suffix to
   affix in that case.
 
-  nominative comes from latin cāsus nominātīvus 
+  nominative comes from latin cāsus nominātīvus
   means case for naming.
   '''
   return text
@@ -110,7 +112,7 @@ def accusative(text, voicer=voice):
   The accusative case (abbreviated acc) of a noun is the
   grammatical case used to mark the direct object of a
   transitive verb. The same case is used in many
-  languages for the objects of (some or all) prepositions. 
+  languages for the objects of (some or all) prepositions.
 
   ✎︎ examples
   ```
@@ -133,7 +135,7 @@ def accusative(text, voicer=voice):
 
   return skip_falsy_and_join(
     voicer(text),
-    # if ends with a vowel, echo the genitive 
+    # if ends with a vowel, echo the genitive
     # sound ⟨n⟩ right before the voiced suffix
     #not ends_with_consonant(text) and Suffix.Y,
     affix.value,
@@ -170,7 +172,7 @@ def genitive(text):
     # nominative form
     voice(text),
 
-    # if ends with a vowel, echo the genitive 
+    # if ends with a vowel, echo the genitive
     # sound ⟨n⟩ right before the voiced suffix
     not ends_with_consonant(text)
     and Suffix.N,
@@ -181,6 +183,45 @@ def genitive(text):
     # genitive sound ⟨n⟩
     Suffix.N,
   )
+
+
+def possesive(text,person):
+  '''
+  ## possesive case (iyelik in turkish)
+  Creates a relationship of belonging
+  between one thing and another.
+  It refers nouns to people, countries, animals, objects.
+
+  ✎︎ examples
+  ```
+  Kahvesi (Her coffee)
+  Kitabım (My book)
+  Evin (Your home)
+
+  ```
+  '''
+
+  states = {
+      Person.FIRST: "m",
+      Person.SECOND: "n",
+      Person.THIRD: NOTHING
+  }
+
+  suffix = states[person]
+  last_vowel = get_last_vowel(text)
+  symbol =get_vowel_symbol(last_vowel)
+
+  if ends_with_consonant(text):
+    last_vowel = get_last_vowel(text)
+    symbol =get_vowel_symbol(last_vowel)
+
+    return join(voice(text), harmony(symbol).value, suffix)
+
+  else:
+    if person == Person.THIRD:
+        return join(voice(text), Suffix.S, harmony(symbol).value)
+    else:
+        return join(voice(text), suffix)
 
 def dative(text):
   '''
@@ -206,7 +247,7 @@ def dative(text):
     # nominative form
     voice(text),
 
-    # if ends with a vowel, echo the genitive 
+    # if ends with a vowel, echo the genitive
     # sound ⟨n⟩ right before the voiced suffix
     not ends_with_consonant(text) and Suffix.Y,
 
@@ -219,7 +260,7 @@ def locative(text):
   ## locative case (bulunma in turkish)
   Locative is a grammatical case which indicates a location.
   It corresponds vaguely to the English prepositions "in",
-  "on", "at", and "by". 
+  "on", "at", and "by".
 
   ✎︎ examples
   ```
