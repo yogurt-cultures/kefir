@@ -686,7 +686,7 @@ def combinator(copula, text, whom=Person.THIRD, is_plural=False):
       text = predicate(text, whom, i, is_plural)
   except TypeError:
     raise Exception(
-      'invalid copula. options: %s' % Copula
+      'invalid copula. options: %s' % copula
     )
 
   return text
@@ -699,12 +699,6 @@ def predicate(
 ):
   if isinstance(person, str):
     person = get_enum_member(Person, person)
-
-  # try:
-  #   Copula(copula)
-  # except ValueError:
-  #   return combinator(copula, text, person, is_plural)
-
   if isinstance(copula, str):
     copula = get_enum_member(Copula, copula)
   elif isinstance(copula, tuple):
