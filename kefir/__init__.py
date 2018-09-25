@@ -77,9 +77,8 @@ Kefir is designed to construct sentences by using
  - conditional
 
 '''
-from .subject import subject
+from .subject import subject, locative, genitive
 from .predication import predicate, Copula
-from .case import locative, genitive
 from .functional import enum_values
 
 def sentence(subject, predicate, delimiter=' '):
