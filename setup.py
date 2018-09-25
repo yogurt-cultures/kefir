@@ -2,7 +2,6 @@
 # Release notes
 
 ```
-TODO: release 0.1.1
 -----------------------------------------+
              |           version         |
 day  | month | year | major  minor patch |
@@ -29,8 +28,7 @@ readme_clean = TAG_RE.sub('', readme)
 
 setup(
     name='kefir',
-    version='0.1.0',
-    # version='0.1.1',
+    version='0.1.1',
     description='Kefir is a natural language processing kit for Turkic languages',
     long_description=readme_clean,
     url='https://github.com/yogurt-cultures/kefir',
