@@ -249,7 +249,7 @@ def inferential(predicate, whom=Person.THIRD, is_plural=False):
 
 def conditional(predicate, whom=Person.THIRD, is_plural=False):
   '''
-  ### inferential mood (-isem in turkish)
+  ### conditional mood (-isem in turkish)
   It is a grammatical mood used to express a proposition whose
   validity is dependent on some condition, possibly counterfactual.
 
