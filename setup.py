@@ -31,6 +31,7 @@ setup(
     version='0.1.2',
     description='Kefir is a natural language processing kit for Turkic languages',
     long_description=readme_clean,
+    long_description_content_type='text/markdown',
     url='https://github.com/yogurt-cultures/kefir',
     author='Yogurt Cultures',
     author_email='cediddi@gmail.com',
