@@ -28,7 +28,7 @@ readme_clean = TAG_RE.sub('', readme)
 
 setup(
     name='kefir',
-    version='0.1.2',
+    version='0.1.3',
     description='Kefir is a natural language processing kit for Turkic languages',
     long_description=readme_clean,
     url='https://github.com/yogurt-cultures/kefir',
