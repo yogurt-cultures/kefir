@@ -15,6 +15,7 @@ Implemented only six grammatical cases.
   - Accusative (-i, dolaylı)
   - Ablative
   - Locative
+  - Possesive
 
 Turkish has 9 more cases (will be somehow implemented in future).
 
@@ -26,7 +27,6 @@ Turkish has 9 more cases (will be somehow implemented in future).
   - Coverage
   - Qualitative
   - Conditional
-  - Possesive
 
   Detailed explaination:
   https://en.wikibooks.org/wiki/Turkish/Cases
