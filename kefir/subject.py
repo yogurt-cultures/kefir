@@ -185,7 +185,7 @@ def genitive(text):
   )
 
 
-def possesive(text,person):
+def possesive(text,whom,is_plural = False):
   '''
   ## possesive case (iyelik in turkish)
   Creates a relationship of belonging
@@ -197,6 +197,9 @@ def possesive(text,person):
   Kahvesi (Her coffee)
   Kitabım (My book)
   Evin (Your home)
+  Dolabımız (Our wardrobe)
+  Yuvanız (Your nest)
+  Okulları (Their school)
 
   ```
   '''
@@ -207,18 +210,33 @@ def possesive(text,person):
       Person.THIRD: NOTHING
   }
 
-  suffix = states[person]
+
   last_vowel = get_last_vowel(text)
-  symbol =get_vowel_symbol(last_vowel)
+  symbol = get_vowel_symbol(last_vowel)
+
+  if is_plural and whom == Person.THIRD:
+      if is_front(last_vowel):
+        symbol = Front.E
+        suffix = join("ler", harmony(symbol).value)
+      else:
+        symbol = Back.A
+        suffix = join("lar", harmony(symbol).value)
+
+  elif is_plural:
+      suffix = join(states[whom],harmony(symbol).value, Suffix.Z)
+  else:
+      suffix = states[whom]
 
   if ends_with_consonant(text):
-    last_vowel = get_last_vowel(text)
-    symbol =get_vowel_symbol(last_vowel)
-
-    return join(voice(text), harmony(symbol).value, suffix)
+    if whom == Person.THIRD and is_plural:
+      return join(text, suffix)
+    else:
+      return join(voice(text), harmony(symbol).value, suffix)
 
   else:
-    if person == Person.THIRD:
+    if whom == Person.THIRD and is_plural:
+        return join(voice(text), suffix)
+    elif whom == Person.THIRD and is_plural == False:
         return join(voice(text), Suffix.S, harmony(symbol).value)
     else:
         return join(voice(text), suffix)
