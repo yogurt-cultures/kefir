@@ -503,7 +503,7 @@ def impotential(predicate, whom=Person.THIRD, is_plural=False):
 
   ✎︎ examples
   ```
-  gidemem (i cannot come)
+  gidemem (i cannot go)
   kaçamayız (we cannot run away)
   ```
 
