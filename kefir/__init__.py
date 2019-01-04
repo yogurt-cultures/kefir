@@ -80,6 +80,7 @@ Kefir is designed to construct sentences by using
 from .subject import subject, locative, genitive
 from .predication import predicate, Copula
 from .functional import enum_values
+from .syllable import syllable
 
 def sentence(subject, predicate, delimiter=' '):
   return delimiter.join((subject, predicate))
