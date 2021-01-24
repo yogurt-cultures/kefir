@@ -40,21 +40,10 @@ class Back(Enum):
   U = 'u'
   O = 'o'
 
-ROUNDED_FRONT_VOWELS =   {
-  Front.U, Front.O,
-}
-
-UNROUNDED_FRONT_VOWELS = {
-  Front.E, Front.I,
-}
-
-ROUNDED_BACK_VOWELS = {
-  Back.U, Back.O,
-}
-
-UNROUNDED_BACK_VOWELS = {
-  Back.A, Back.I,
-}
+ROUNDED_FRONT_VOWELS =   { Front.U, Front.O }
+UNROUNDED_FRONT_VOWELS = { Front.E, Front.I }
+ROUNDED_BACK_VOWELS = { Back.U, Back.O }
+UNROUNDED_BACK_VOWELS = { Back.A, Back.I }
 
 ROUNDED_VOWELS = (
   ROUNDED_BACK_VOWELS.union(
@@ -81,7 +70,6 @@ VOICELESS_NON_CONTINUANT = {
 }
 
 VOICELESS_CONSONANTS = (
-  # FISTIKÇI ŞAHAP 👳
   VOICELESS_CONTINUANT.union(
     VOICELESS_NON_CONTINUANT
   )
