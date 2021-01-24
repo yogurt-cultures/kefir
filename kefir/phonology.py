@@ -7,7 +7,7 @@ vowel harmony. Vowels may be classified as Back
 or Front vowels, based on the placement of the
 sound in the mouth.
 
-```
+
  Front Vowels
 +----------------+
  Unrounded  ⟨e⟩ ⟨i⟩
@@ -17,9 +17,7 @@ sound in the mouth.
 +----------------+
  Unrounded  ⟨a⟩ ⟨ı⟩
  Rounded    ⟨u⟩ ⟨o⟩
-```
 
-TODO: Document consonant harmony.
 '''
 from enum import Enum
 
