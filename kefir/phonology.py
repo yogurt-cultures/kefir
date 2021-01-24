@@ -69,33 +69,17 @@ VOICELESS_NON_CONTINUANT = {
   'f', 'h', 's', 'ş',
 }
 
-VOICELESS_CONSONANTS = (
-  VOICELESS_CONTINUANT.union(
-    VOICELESS_NON_CONTINUANT
-  )
-)
+VOICELESS_CONSONANTS = (VOICELESS_CONTINUANT
+                        .union(VOICELESS_NON_CONTINUANT))
 
-VOICED_CONSONANTS = (
-  CONTINUANT_VOICED.union(
-    NON_CONTINUANT_VOICED
-  )
-)
+VOICED_CONSONANTS = (CONTINUANT_VOICED
+                     .union(NON_CONTINUANT_VOICED))
 
-CONSONANTS = (
-  VOICED_CONSONANTS.union(
-    VOICELESS_CONSONANTS
-  )
-)
+CONSONANTS = (VOICED_CONSONANTS
+              .union(VOICELESS_CONSONANTS))
 
-ends_with_consonant = (
-  lambda text:
-    text[-1] in CONSONANTS
-)
-
-ends_with_voiceless = (
-  lambda text:
-    text[-1] in VOICELESS_CONSONANTS
-)
+ends_with_consonant = lambda text: text[-1] in CONSONANTS;
+ends_with_voiceless = lambda text: text[-1] in VOICELESS_CONSONANTS;
 
 SOFTENING_SOUNDS = {
   'p': 'b',
