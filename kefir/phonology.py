@@ -62,11 +62,13 @@ NON_CONTINUANT_VOICED = {
 }
 
 VOICELESS_CONTINUANT = {
-  'p', 'ç', 't', 'k',
+  'p', 'ç',
+  't', 'k',
 }
 
 VOICELESS_NON_CONTINUANT = {
-  'f', 'h', 's', 'ş',
+  'f', 'h',
+  's', 'ş',
 }
 
 VOICELESS_CONSONANTS = (VOICELESS_CONTINUANT
