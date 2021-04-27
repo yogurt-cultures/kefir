@@ -1,13 +1,12 @@
 '''
 =================================================================
-Turkish Phonology
+Phonology
 =================================================================
 
-In Hungarian, Finnish, and Turkic languages
-vowel sounds are organized in a concept called
-vowel harmony. Vowels may be classified as Back
-or Front vowels, based on the placement of the
-sound in the mouth.
+In human languages vowel sounds are organized
+in a concept called vowel harmony. Vowels may
+be classified as Back or Front vowels, based
+on the placement of the sound in the mouth.
 
 
  Front Vowels
