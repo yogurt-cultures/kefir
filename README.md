@@ -369,9 +369,9 @@ aynı gezegenliyiz (we're from same planet)
 
 ```
 
-### Inferential Mood ('-miş' in Turkish)
+### Inevidential Past tense ('-miş' in Turkish)
 
-Inferential mood is used to convey information about events
+Inievidential past tense is used to convey information about events
 which were not directly observed or were inferred by the speaker.
 
 ✎︎ Examples:
@@ -401,9 +401,9 @@ doktormuş (he/she/it was a doctor as i've heard)
 
 ```
 
-### Inferential Mood ('-isem' in Turkish)
+### Inferential-Conditional Mood ('-ise' in Turkish)
 
-Inferential mood is a grammatical mood used to express a proposition whose
+Inferential-conditional mood is a grammatical mood used to express a proposition whose
 validity is dependent on some condition, possibly counterfactual.
 
 ✎︎ Examples:
